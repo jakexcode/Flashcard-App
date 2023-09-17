@@ -1,5 +1,6 @@
 {
   "name": "project-flashcards",
+  "homepage": "https://jakexcode.github.io/Flashcard-app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -13,13 +14,15 @@
     "react-scripts": "4.0.0"
   },
   "scripts": {
-    "build": "react-scripts build",
+    "build": "react-scripts --openssl-legacy-provider build",
     "docker:build": "docker image build . -t thinkful-ed/zid-fe-project-flashcards-01-qualified",
     "docker:run": "docker run --rm -it -p 3000:3000 thinkful-ed/zid-fe-project-flashcards-01-qualified",
     "docker:stop": "docker stop $(docker ps -q)",
     "docker:test": "docker run -t  thinkful-ed/zid-fe-project-flashcards-01-qualified npm test",
     "eject": "react-scripts eject",
     "start": "concurrently \"npm run start:server\" \"npm run start:react\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start:react": "react-scripts start",
     "start:server": "json-server ./data/db.json",
     "start:solution": "npm run -it docker:build && npm run docker:run",
@@ -43,6 +46,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
+    "gh-pages": "^6.0.0",
     "json-server": "^0.16.1"
   }
 }
